@@ -3,7 +3,9 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
+#ifdef _WIN32
 #include <windows.h>
+#endif
 using namespace std;
 
 string generateRandomNum(size_t len) 
@@ -52,8 +54,10 @@ void countBullsAndCows(const string& pc, const string& player, int& bulls, int& 
 int main() 
 {
     setlocale(LC_ALL, "RU");
+    #ifdef _WIN32
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
+    #endif
     srand(time(0));
     
     const vector<char> data = {'0','1','2','3','4','5','6','7','8','9'};
@@ -62,12 +66,12 @@ int main()
     string pc = generateRandomNum(len) ;
     string player;
     int attempts = 0;
-    cout << "Игра 'Быки и коровы'!\n";
+    cout << "\nИгра 'Быки и коровы'!\n";
     cout << "Компьютер загадал число из 4 неповторяющихся цифр.\n";
     cout << "Ваша задача — угадать это число.\n";
     cout << "Кол-во коров — это сколько цифр угадано без совпадений с их позициями.\n";
     cout << "Кол-во быков — это сколько цифр угадано вплоть до позиции.\n";
-    cout << "Чтобы предварительно завершить игру, введите 'q'.\n";
+    cout << "\nЧтобы предварительно завершить игру, введите 'q'.\n";
 
     while(true)
     {
