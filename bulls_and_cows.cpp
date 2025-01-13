@@ -61,25 +61,36 @@ int main()
 
     string pc = generateRandomNum(len) ;
     string player;
+    int attempts = 0;
+    cout << "Игра 'Быки и коровы'!\n";
+    cout << "Компьютер загадал число из 4 неповторяющихся цифр.\n";
+    cout << "Ваша задача — угадать это число.\n";
+    cout << "Кол-во коров — это сколько цифр угадано без совпадений с их позициями.\n";
+    cout << "Кол-во быков — это сколько цифр угадано вплоть до позиции.\n";
+    cout << "Чтобы предварительно завершить игру, введите 'q'.\n";
+
     while(true)
     {
-        cout << pc;
-        cout << "Введите предполагаемое число: ";
+        cout << "\nВведите предполагаемое число: ";
         cin >> player;
+        if (player == "q") return 0;
 
         while(!(isNum(player, data)) || player.length() != len)
         {
-            cout << "ошибка ввода! Попробуйте еще раз.\n";
+            cout << "Ошибка ввода! Попробуйте еще раз.\n";
             cout << "Введите предполагаемое четырехзначное число: ";
             cin >> player;
+            if (player == "q") return 0;
+            cout << endl;
         }
 
+        attempts++;
         int bulls = 0, cows = 0;
         countBullsAndCows(pc, player, bulls, cows);
         
         if (bulls == len) 
         {
-            cout << "Поздравляем! Вы угадали число " << pc << endl;
+            cout << "Поздравляем! Вы угадали число " << pc << " за " << attempts << " попыток.\n";
             break;
         } 
         else 
